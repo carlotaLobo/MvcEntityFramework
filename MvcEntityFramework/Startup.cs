@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MvcEntityFramework.Data;
@@ -14,9 +15,15 @@ namespace MvcEntityFramework
 {
     public class Startup
     {
+        //interfaz para acceder a appsettings.json
+        IConfiguration Configuration { get; set; }
+        public Startup(IConfiguration configuration)
+        {
+            this.Configuration = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
-            //nuestra aplicacion
+            //LA APLICACION
 
             // las dependencias de objetos se resuelven en los servicios de la App
             // dos opciones:
@@ -24,20 +31,23 @@ namespace MvcEntityFramework
             //services.AddTransient<Coche>();
             //2: .AddSingleton<T> una misma instancia del objeto, solo una, para toda la app
             //services.AddSingleton<ICoche,Coche>();
+            //String cadena = "Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=MCSD2020";
 
+
+            String cadena = this.Configuration.GetConnectionString("casamysqlhospital");
             services.AddSingleton<ICoche>( c =>
                     new Deportivo("ferrari","testarrossa","testarrossa.jpg",290)
             );
-            String cadena = "Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=MCSD2020";
             services.AddSingleton<IDepartamentosContext>( c => 
-                                  new DepartamentosContextSQL(cadena) 
+                                  new DepartamentosContextMysql(cadena) 
             );
+
             services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //el servidor
+            //EL SERVIDOR
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
