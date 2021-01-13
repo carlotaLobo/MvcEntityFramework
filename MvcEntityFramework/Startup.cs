@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MvcEntityFramework.Data;
 using MvcEntityFramework.Models;
+using MvcEntityFramework.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,17 +33,20 @@ namespace MvcEntityFramework
             //services.AddTransient<Coche>();
             //2: .AddSingleton<T> una misma instancia del objeto, solo una, para toda la app
             //services.AddSingleton<ICoche,Coche>();
-            //String cadena = "Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=MCSD2020";
 
+            String cadena = "Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=Data Source=localhost;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=MCSD2020";
+            //String cadena = this.Configuration.GetConnectionString("casamysqlhospital");
 
-            String cadena = this.Configuration.GetConnectionString("casamysqlhospital");
-            services.AddSingleton<ICoche>( c =>
-                    new Deportivo("ferrari","testarrossa","testarrossa.jpg",290)
-            );
+            services.AddTransient<RepositoryHospital>();
+            services.AddDbContext<HospitalContext>(options=> options.UseSqlServer(cadena));
+
             services.AddSingleton<IDepartamentosContext>( c => 
                                   new DepartamentosContextMysql(cadena) 
-            );
-
+            );  
+            
+            services.AddSingleton<ICoche>( c =>
+                    new Deportivo("ferrari","testarrossa","testarrossa.jpg",290)
+            ); 
             services.AddControllersWithViews();
         }
 
