@@ -1,0 +1,24 @@
+﻿@model List<Enfermo>
+
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th>Apellido</th>
+            <th>Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Enfermo e in Model)
+        {
+            <tr>
+                <td></td>
+                <td>@e.Apellido</td>
+                <td>
+                    @*@Html.ActionLink("Detalle","Detalle","Enfermo", new { id= @e.Inscripcion })*@
+                    <a asp-action="detalle" asp-controller="enfermo" asp-route-id="@e.Inscripcion">detalles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
