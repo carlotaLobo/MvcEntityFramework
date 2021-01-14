@@ -1,7 +1,9 @@
 ﻿@model List<Enfermo>
 
+@Html.ActionLink("buscar por genero", "enfermosgenero", "enfermo", null, new { @class = "nav-link" })
+@Html.ActionLink("insertar enfermo", "insert", "enfermo", null, new { @class = "nav-link" })
 
-<table class="table table-success table-striped">
+<table class="table table-dark table-striped">
     <thead>
         <tr>
             <th>Apellido</th>
@@ -11,14 +13,19 @@
     <tbody>
         @foreach (Enfermo e in Model)
         {
-            <tr>
-                <td></td>
-                <td>@e.Apellido</td>
-                <td>
-                    @*@Html.ActionLink("Detalle","Detalle","Enfermo", new { id= @e.Inscripcion })*@
-                    <a asp-action="detalle" asp-controller="enfermo" asp-route-id="@e.Inscripcion">detalles</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@e.Apellido</td>
+            <td>
+                @*@Html.ActionLink("Detalle","Detalle","Enfermo", new { id= @e.Inscripcion })*@
+                <a asp-action="detalle" asp-controller="enfermo" asp-route-id="@e.Inscripcion">detalles</a>
+            </td>
+            <td>
+                <a asp-action="eliminar" asp-controller="enfermo" asp-route-id="@e.Inscripcion">eliminar</a>
+            </td>
+            <td>
+                <a asp-action="update" asp-controller="enfermo" asp-route-id="@e.Inscripcion">actualizar</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

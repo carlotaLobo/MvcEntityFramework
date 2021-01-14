@@ -1,0 +1,41 @@
+﻿@model List<Empleado>
+@{ 
+    List<String> oficios = ViewBag.oficios as List<String>;
+}
+<div class="row m-5">
+    <form method="post">
+        <label>Oficio: </label>
+        <select class="form-select" name="oficio">
+            @foreach (String o in oficios)
+            {
+                <option value="@o">@o</option>
+            }
+        </select>
+        <label>Incremento: </label>
+        <input class="form-control"  name="incremento"/>
+        <button class="btn btn-success my-5">incrementar</button>
+    </form>
+</div>
+
+
+    <div class="row m-5">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Apellido</th>
+                    <th>Oficio</th>
+                    <th>Salario</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Empleado e in Model)
+                {
+                    <tr>
+                        <td>@e.Apellido</td>
+                        <td>@e.Oficio</td>
+                        <td>@e.Salario</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

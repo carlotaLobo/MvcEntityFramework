@@ -1,0 +1,37 @@
+﻿@model List<Enfermo>
+
+@{
+    List<Genero> sexos = ViewBag.sexos as List<Genero>;
+}
+<h1>Buscador de Enfermos por Generos</h1>
+
+<ul class="list-group bg-dark my-5">
+    @foreach (var g in sexos)
+    {
+        <li class="list-group-item bg-dark">
+            <a class="text-white"
+               asp-action="enfermosgenero"
+               asp-controller="enfermo"
+               asp-route-genero="@g.Value">
+                @g.Text
+        </a>
+    </li>
+}
+</ul>
+@if (Model != null)
+{
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>Apellido</tr>
+        </thead>
+        <tbody>
+            @foreach (Enfermo e in Model)
+            {
+                <tr>
+                    <td>@e.Apellido</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

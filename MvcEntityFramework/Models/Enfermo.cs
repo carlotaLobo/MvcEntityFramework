@@ -12,6 +12,8 @@ namespace MvcEntityFramework.Models
     {
         [Key]
         [Column("INSCRIPCION")]
+        // siempre que haya PK en la bbdd hay qu eponerlo
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Inscripcion { get; set; }
         [Column("APELLIDO")]
         public String Apellido { get; set; }
