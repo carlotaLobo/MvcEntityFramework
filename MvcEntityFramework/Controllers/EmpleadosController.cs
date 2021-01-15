@@ -31,5 +31,16 @@ namespace MvcEntityFramework.Controllers
             List<Empleado> empleados = this.repository.FindEmpleadoByOficio(oficio);
             return View(empleados);
         }
+        public IActionResult EmpleadosDepartamentoLambda()
+        {
+         
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EmpleadosDepartamentoLambda(int departamento)
+        {
+            ResumenDepartamento resumen = this.repository.GetResumenDepartamento(departamento);
+            return View(resumen);
+        }
     }
 }

@@ -47,7 +47,28 @@ namespace MvcEntityFramework.Repositories
    
             } 
                this.context.SaveChanges();   
+        }
+        public ResumenDepartamento GetResumenDepartamento(int deptno)
+        {
+            List<Empleado> empleados = this.FindAll();
+            List<Empleado> filtro = empleados
+                .Where(e => e.Departamento == deptno).ToList();
 
+            if(filtro.Count == 0)
+            {
+                return null;
+            }
+            int personas = filtro.Count();
+            int maximo = filtro.Max(e=> e.Salario);
+            int min = filtro.Min(e => e.Salario);
+
+            ResumenDepartamento resumen = new ResumenDepartamento();
+            resumen.Empleados = filtro;
+            resumen.MaximoSalario = maximo;
+            resumen.MinimoSalario = min;
+            resumen.Personas = personas;
+
+            return resumen;
         }
     }
 }

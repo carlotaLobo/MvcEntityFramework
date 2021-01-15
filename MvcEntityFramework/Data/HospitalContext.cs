@@ -14,5 +14,6 @@ namespace MvcEntityFramework.Data
         public HospitalContext(DbContextOptions<HospitalContext> options) : base(options){} // sobreescribimos las options de la clase heredada
         //debemos mapear con Dbset cada propiedad para que sea accesible
         public DbSet<Hospital> Hospitals { get; set; }
+        public DbSet<Plantilla> Plantilla { get; set; }
     }
 }

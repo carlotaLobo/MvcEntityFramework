@@ -23,5 +23,6 @@ namespace MvcEntityFramework.Repositories
                            select datos;
             return consulta.ToList();
         }
+
     }
 }
