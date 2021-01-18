@@ -1,0 +1,33 @@
+﻿@model List<Doctor>
+
+@Html.ActionLink("aumentar salario por especialidad", "AumentarSalario", "Doctor", null, new { @class="btn btn-info p-5"})
+
+    <h3>Modificar Especialidad</h3>
+
+    <form class="my-5" method="post">
+        <label>Id Doctor</label>
+        <input name="id"  type="text" class="form-control" />
+        <label>Especialidad</label>
+        <input name="especialidad" type="text" class="form-control" />
+        <button type="submit" class="btn btn-danger">cambiar</button>
+    </form>
+    <table class="table text-white ">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Doctor d in Model)
+            {
+                <tr>
+                    <td>@d.Id</td>
+                    <td>@d.Apellido</td>
+                    <td>@d.Especialidad</td>
+                </tr>
+            }
+        </tbody>
+    </table>

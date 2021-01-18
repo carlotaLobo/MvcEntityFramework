@@ -15,6 +15,31 @@ namespace MvcEntityFramework.Repositories
             this.context = context;
         }
 
-        public List<Plantilla> FindAll
+        public List<Plantilla> FindAll()
+        {
+
+            var consulta = from dato in this.context.Plantilla
+                           select dato;
+
+            return consulta.ToList();
+        }
+        public ResumenPlantilla FindBySalario(int salario)
+        {
+            var consulta = from dato in this.context.Plantilla
+                           select dato;
+
+            ResumenPlantilla resumen = new ResumenPlantilla();
+            resumen.plantilla  = consulta.Where(s => s.Salario > salario || s.Salario == salario).ToList();
+            resumen.max = consulta.Max(s => s.Salario);
+            resumen.min = consulta.Min(s => s.Salario);
+            resumen.cantidad = resumen.plantilla.Count();
+
+            if(resumen != null)
+            {
+                return resumen;
+            }
+
+            return null;
+        }
     }
 }

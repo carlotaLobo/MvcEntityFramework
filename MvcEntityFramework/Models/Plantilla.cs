@@ -16,11 +16,11 @@ namespace MvcEntityFramework.Models
         [Column("empleado_no")]
         public int Empleadono { get; set; }
         [Column("apellido")]
-        public int Apellido { get; set; }
+        public String Apellido { get; set; }
         [Column("salario")]
         public int Salario { get; set; }
         [Column("funcion")]
-        public int Funcion { get; set; }
+        public String Funcion { get; set; }
 
     }
 }

@@ -1,0 +1,39 @@
+﻿@{
+    List<String> especialidades = ViewBag.especialidades as List<String>;
+}
+@model List<Doctor>
+
+<h4>Modificar</h4>
+
+<form method="post">
+    <label>Aumento</label>
+    <input type="number" name="aumento" class="form-control" />
+    <label>Especialidad</label>
+    <select name="especialidad" class="form-select">
+        @foreach (String d in especialidades)
+        {
+            <option value="@d">@d</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-danger my-5">aumentar</button>
+</form>
+
+<table class="table text-white my-5">
+
+    <thead>
+        <tr>
+            <th>Salario</th>
+            <th>Especialidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Doctor d in Model)
+        {
+            <tr>
+                <td>@d.Salario</td>
+                <td>@d.Especialidad</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
