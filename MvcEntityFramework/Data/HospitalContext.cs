@@ -33,6 +33,25 @@ using System.Threading.Tasks;
 //AS
 //UPDATE DOCTOR SET SALARIO = SALARIO + @AUMENTO WHERE ESPECIALIDAD = @ESPECIALIDAD
 //GO
+
+
+//ALTER VIEW EMPLEADOSHOSPITAL
+//AS
+//	SELECT ISNULL(EMPLEADO_NO, 0) AS IDEMPLEADO
+//    , APELLIDO, FUNCION, SALARIO, HOSPITAL_COD 
+//	FROM PLANTILLA
+//	UNION
+//	SELECT DOCTOR_NO, APELLIDO, ESPECIALIDAD, SALARIO, HOSPITAL_COD 
+//	FROM DOCTOR
+//GO
+
+//CREATE PROCEDURE PROCEDUREEMPLEADOSHOSPITAL
+//(@HOSPITALCOD INT, @SUMA INT OUT, @MEDIA INT OUT)
+//AS
+//SELECT * FROM EMPLEADOSHOSPITAL WHERE HOSPITAL_COD = @HOSPITALCOD
+//SELECT @SUMA=SUM(SALARIO), @MEDIA = AVG(SALARIO)
+//FROM EMPLEADOSHOSPITAL WHERE HOSPITAL_COD = @HOSPITALCOD
+//GO
 #endregion
 namespace MvcEntityFramework.Data
 {
@@ -45,6 +64,8 @@ namespace MvcEntityFramework.Data
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<Plantilla> Plantilla { get; set; }
         public DbSet<Doctor> Doctores { get; set; }
+        public DbSet<EmpleadoHospital> EmpleadoHospital { get; set; }
+        public DbSet<EmpleadosVistaTabla> EmpleadosVistas { get; set; }
 
         //CREAMOS EL PRIMER PROCEDIMIENTO DE ACCION
         public void ModificarEspecialidad(int iddoctor, String especialidad)

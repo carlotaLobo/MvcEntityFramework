@@ -1,0 +1,37 @@
+﻿@model ProcedimientoEmpleadosVista
+
+<form method="post">
+    <select name="hospitalcod">
+        @foreach (EmpleadosVistaTabla p in Model.EmpleadosVistas)
+        {
+            <option value="@p.Codigo">@p.Departamento</option>
+        }
+    </select>
+    <button type="submit">buscar</button>
+</form>
+
+@if (Model != null)
+{
+    <h2>Suma salarial: @Model.Suma</h2>
+    <h2>Media Salarial: @Model.Media</h2>
+    <table class="table table-dark text-white">
+        <thead>
+            <tr>
+                <th>Apellido</th>
+                <th>Funcion</th>
+                <th>Salario</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (EmpleadosVistaTabla p in Model.EmpleadosVistas)
+            {
+                <tr>
+                    <td>@p.Apellido</td>
+                    <td>@p.Trabajo</td>
+                    <td>@p.Salario</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

@@ -1,0 +1,34 @@
+﻿@model ProcedimientoEmpleadoHospital
+
+<form method="post">
+    <label>Codigo Hospital</label>
+    <input class="form-control" type="text" name="hospitalcod"/>
+    <button type="submit" class="btn btn-info my-5">
+        buscar
+    </button>
+</form>
+@if(Model != null)
+{
+    <h2>Suma salarial: @Model.SumaSalarial</h2>
+    <h2>Media Salarial: @Model.MediaSalarial</h2>
+    <table class="table table-dark text-white">
+        <thead>
+            <tr>
+                <th>Apellido</th>
+                <th>Funcion</th>
+                <th>Salario</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (EmpleadoHospital p in Model.Empleados)
+            {
+                <tr>
+                    <td>@p.Apellido</td>
+                    <td>@p.Funcion</td>
+                    <td>@p.Salario</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

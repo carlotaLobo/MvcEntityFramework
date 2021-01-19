@@ -43,6 +43,8 @@ namespace MvcEntityFramework
             services.AddTransient<EmpleadoRepository>();
             services.AddTransient<RepositoryPlantilla>();
             services.AddTransient<RepositoryDoctor>();
+            services.AddTransient<RepositoryEmpleadosHospital>();
+            services.AddTransient<RepositoryEmpleadosVista>();
             services.AddDbContext<EmpleadoContext>(option => option.UseSqlServer(cadena));
             services.AddDbContext<EnfermoContext>(option => option.UseSqlServer(cadena));
             services.AddSingleton<IDepartamentosContext>( c => 
